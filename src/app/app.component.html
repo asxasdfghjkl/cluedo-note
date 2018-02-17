@@ -1,0 +1,19 @@
+<header class="grid">
+	<button (click)="toggleLang()">{{ lang ? '中文' : 'English' }}</button>
+	<div class="no-select" (click)="changePlayerName(index)" *ngFor="let player of playerArr;let index = index">{{player}}</div>
+</header>
+<main class="grid">
+	<ng-template let-type ngFor [ngForOf]="clues">
+		<div class="row-type no-select">{{type.type[lang]}}</div>
+		<ng-template let-item ngFor [ngForOf]="type.items">
+			<div class="no-select box-item" [innerHTML]="item[lang]"></div>
+			<div class="box-clue" *ngFor="let p of playerArr;let player = index;" [class.selected]="selected === item + player" [style.background]="color[item + player]"
+			 (click)="selected = item + player">
+				<span class="fa fa-2x" [ngClass]="'fa-' + icon[item + player]"></span>
+			</div>
+			<div class="box-clue-num" *ngFor="let player of playerArr" [class.selected]="selected === item + player" [style.background]="color[item + player]"
+			 (click)="selected = item + player">{{ num[item + player]?.join(',') }}</div>
+		</ng-template>
+	</ng-template>
+</main>
+<app-toolbox [disabled]="!selected" (buttonClick)="onButtonClick($event)"></app-toolbox>

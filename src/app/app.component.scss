@@ -1,0 +1,80 @@
+@import 'theme';
+
+$box-size: 35px;
+$num-size: 35px;
+
+header {
+	left: 0;
+	top: 0;
+	position: fixed;
+	background: white;
+	> div {
+		text-align: center;
+	}
+}
+
+main {
+	margin-top: 29px;
+	margin-bottom: 200px;
+}
+
+app-toolbox {
+	position: fixed;
+	bottom: 0;
+}
+
+.grid {
+	width: 100vw;
+	overflow: auto;
+	display: grid;
+	grid-template-columns: minmax(70px, 2fr) repeat(6, minmax(30px, 1fr));
+
+	div {
+		padding: 3px;
+		border: 1px solid $theme-color;
+		box-sizing: border-box;
+
+		&.box-item {
+			display: flex;
+			align-items: center;
+			vertical-align: middle;
+			overflow: hidden;
+			grid-row: span 2;
+		}
+
+		&.box-clue {
+			border-bottom: 0;
+		}
+
+		&.box-clue-num {
+			border-top: 0;
+			font-size: 0.6em;
+			word-break: break-all;
+		}
+
+		&.selected {
+			border-style: dashed;
+			&.box-clue::before {
+				content: '';
+				border-style: solid;
+				width: 0px;
+				height: 0px;
+				box-sizing: content-box;
+				border-width: 8px;
+				border-color: $theme-color transparent transparent $theme-color;
+				position: absolute;
+				margin: -3px 0 0 -3px;
+			}
+		}
+	}
+
+	> .row-type {
+		background: $theme-color;
+		color: #ffffff;
+		grid-column: 1 / 8;
+	}
+}
+
+.no-select {
+	user-select: none;
+}
