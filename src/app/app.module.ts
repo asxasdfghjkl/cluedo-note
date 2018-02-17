@@ -5,9 +5,9 @@ import { AppComponent } from './app.component';
 import { ToolboxComponent } from './components/toolbox.component';
 
 @NgModule({
-	declarations: [AppComponent, ToolboxComponent],
-	imports: [BrowserModule],
-	providers: [],
-	bootstrap: [AppComponent]
+  declarations: [AppComponent, ToolboxComponent],
+  imports: [BrowserModule],
+  providers: [],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

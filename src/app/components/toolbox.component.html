@@ -1,23 +1,23 @@
 <div class="row">
-	<button (click)="buttonClick.emit({ type:'icon', value: null })">
-		<span class="fa fa-2x fa-trash"></span>
-	</button>
-	<button *ngFor="let icon of iconBtns" (click)="buttonClick.emit({ type:'icon', value: icon })">
-		<span class="fa fa-2x" [ngClass]="'fa-' + icon"></span>
-	</button>
+  <button (click)="buttonClick.emit({ type:'icon', value: null })">
+    <span class="fa fa-2x fa-trash"></span>
+  </button>
+  <button *ngFor="let icon of iconBtns" (click)="buttonClick.emit({ type:'icon', value: icon })">
+    <span class="fa fa-2x" [ngClass]="'fa-' + icon"></span>
+  </button>
 </div>
 <div class="row">
-	<button (click)="buttonClick.emit({ type:'num', value: null })">
-		<span class="fa fa-2x fa-trash"></span>
-	</button>
-	<button class="num-btn" *ngFor="let num of numBtns" (click)="buttonClick.emit({ type:'num', value: num })">{{num}}</button>
+  <button (click)="buttonClick.emit({ type:'num', value: null })">
+    <span class="fa fa-2x fa-trash"></span>
+  </button>
+  <button class="num-btn" *ngFor="let num of numBtns" (click)="buttonClick.emit({ type:'num', value: num })">{{num}}</button>
 </div>
 <div class="row">
-	<button (click)="buttonClick.emit({ type:'color', value: null })">
-		<span class="fa fa-2x fa-trash"></span>
-	</button>
-	<button class="color-btn" *ngFor="let color of colorBtns" (click)="buttonClick.emit({ type:'color', value: color })">
-		<div [style.background]="color"></div>
-	</button>
+  <button (click)="buttonClick.emit({ type:'color', value: null })">
+    <span class="fa fa-2x fa-trash"></span>
+  </button>
+  <button class="color-btn" *ngFor="let color of colorBtns" (click)="buttonClick.emit({ type:'color', value: color })">
+    <div [style.background]="color"></div>
+  </button>
 </div>
 <div class="block" [style.display]="disabled ? 'block' : 'none'"></div>
