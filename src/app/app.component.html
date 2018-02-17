@@ -11,7 +11,7 @@
         (click)="selected = item + player">
         <span class="fa fa-2x" [ngClass]="'fa-' + icon[item + player]"></span>
       </div>
-      <div class="box-clue-num" *ngFor="let player of playerArr" [class.selected]="selected === item + player" [style.background]="color[item + player]"
+      <div class="box-clue-num" *ngFor="let p of playerArr;let player = index;" [class.selected]="selected === item + player" [style.background]="color[item + player]"
         (click)="selected = item + player">{{ num[item + player]?.join(',') }}</div>
     </ng-template>
   </ng-template>
