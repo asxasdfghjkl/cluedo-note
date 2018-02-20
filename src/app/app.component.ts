@@ -1,6 +1,9 @@
 import CLUES from './clues';
 import { Component } from '@angular/core';
 
+const LANG_ZH = 0;
+const LANG_EN = 1;
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,14 +17,20 @@ export class AppComponent {
   public num: { [key: string]: string[] } = {};
   public selected: string | null = null;
   public clues = CLUES;
-  public lang = 0;
+  public lang: number = LANG_ZH;
+  public showMenu = false;
 
+  private readonly save = ['playerArr', 'icon', 'color', 'num'];
   constructor() {
-    window.addEventListener('beforeunload',
-      ($) => $.returnValue = this.lang ?
-        '重載會失去所有記錄，你確定嗎？' :
-        'Reload will clear all the data. Are you sure?',
-    );
+    if (localStorage.language) {
+      this.lang = localStorage.language === LANG_ZH.toString() ? LANG_ZH : LANG_EN;
+    } else if (!navigator.language.startsWith('zh')) {
+      this.lang = LANG_EN;
+    }
+
+    if (localStorage[this.save[0]]) {
+      this.save.forEach(v => this[v] = JSON.parse(localStorage[v]));
+    }
   }
 
   public onButtonClick($: { type: string; value: string | null }): void {
@@ -41,10 +50,26 @@ export class AppComponent {
     } else {
       this[$.type][this.selected as string] = $.value.toString();
     }
+
+    this.save.forEach(v => localStorage[v] = JSON.stringify(this[v]));
+  }
+
+  public newGame(): void {
+    const result = confirm(this.lang ? '你確定要清除所有記錄嗎？' : 'Do you really want to clear all the data?');
+    if (result) {
+      this.save.forEach(v => {
+        if (!Array.isArray(this[v])) {
+          this[v] = {};
+          delete localStorage[v];
+        }
+      });
+    }
+    this.showMenu = false;
   }
 
   public toggleLang(): void {
-    this.lang = this.lang ? 0 : 1;
+    localStorage.language = this.lang = this.lang ? 0 : 1;
+    this.showMenu = false;
   }
 
   public changePlayerName(index: number): void {

@@ -1,5 +1,10 @@
 <header class="grid">
-  <button (click)="toggleLang()">{{ lang ? '中文' : 'English' }}</button>
+  <button (click)="showMenu = true"><span class="fa fa-bars"></span>{{ ['選單', 'Menu'][lang] }}</button>
+  <ul class="menu" [class.show]="showMenu">
+    <li (click)="newGame()">{{ ['新遊戲', 'New Game'][lang] }}</li>
+    <li (click)="toggleLang()">{{ ['English', '中文'][lang] }}</li>
+  </ul>
+  <div class="menu-backdrop" [class.show]="showMenu" (click)="showMenu = false"></div>
   <div class="no-select" (click)="changePlayerName(index)" *ngFor="let player of playerArr;let index = index">{{player}}</div>
 </header>
 <main class="grid">
@@ -17,3 +22,4 @@
   </ng-template>
 </main>
 <app-toolbox [disabled]="!selected" (buttonClick)="onButtonClick($event)"></app-toolbox>
+
